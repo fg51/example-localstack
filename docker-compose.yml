@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+  example-localstack:
+    container_name: example-localstack
+    image: localstack/localstack:latest
+    ports:
+      - 4566:4566
+    environment:
+      - DEFAULT_REGION=ap-northeast-1
+      - DOCKER_SOCK=/var/run/docker.sock  # enable use locale docker in localstack
+      - DEBUG=1
+    volumes:
+      - example-localstack:/var/lib/localstack/
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./local_script:/etc/localstack/init/ready.d  # the dir is sh-script running at starting docker.
+    networks:
+      example-network:
+
+networks:
+  example-network:
+volumes:
+  example-localstack:
