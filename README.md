@@ -38,3 +38,17 @@ $ curl http://localhost:4566/health
 
 $ /localstack status service
 
+
+
+# CDK 
+
+```sh
+$ npx cdklocal init
+$ npx cdklocal bootstrap
+$ npx cdklocal deploy
+```
+
+- output http://{api-id}.execute-api.localhost.localstack.cloud:4566/{stage-id}/
++ fixed  http://localhost:4566/restapis/{api-id}/{stage-id}/_user_request_/
+
+curl http://localhost:4566/restapis/<api-id>/<stage-id>/_user_request_/
