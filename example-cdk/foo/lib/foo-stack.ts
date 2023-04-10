@@ -9,14 +9,19 @@ export class FooStack extends cdk.Stack {
     super(scope, id, props);
 
     // The code that defines your stack goes here
-    const hello = new lambda.Function(this, 'HelloFunction',  {
-      runtime: lambda.Runtime.NODEJS_18_X, 
-      handler: 'hello.handler', 
-      code: lambda.Code.fromAsset('lib/lambda'), 
+    const hello = new lambda.Function(this, "HelloFunction", {
+      runtime: lambda.Runtime.NODEJS_18_X,
+      handler: "hello.handler",
+      code: lambda.Code.fromAsset("lib/lambda"),
     });
 
-    new apigateway.LambdaRestApi(this, 'APIEndpoint', {
-      handler: hello, 
+    const apiGW = new apigateway.LambdaRestApi(this, "APIEndpoint", {
+      handler: hello,
+    });
+
+    new cdk.CfnOutput(this, "APIGatewayEndPoint", {
+      value:
+        `http://localhost:4556/resapis/${apiGW.restApiId}/prod/_user_request_${apiGW.root.path}`,
     });
 
     // example resource

@@ -3,7 +3,7 @@ version: "3.8"
 services:
   example-localstack:
     container_name: example-localstack
-    image: localstack/localstack:latest
+    image: localstack/localstack:2.0.1
     ports:
       - 4566:4566
     environment:
